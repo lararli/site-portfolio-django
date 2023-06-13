@@ -2,8 +2,8 @@ from django.db import models
 
 # Create your models here.
 class Category(models.Model):
-    name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='images')
+    name = models.CharField(max_length=100, unique=True)
+    image = models.ImageField(upload_to='images', blank=True)
 
     class Meta:
         verbose_name_plural = 'Categories'
@@ -19,7 +19,7 @@ class Project(models.Model):
     url = models.URLField(blank=True)
     github_repo = models.URLField(blank=True)
     date = models.DateField()
-    tags = models.ManyToManyField(Category)
+    tags = models.ManyToManyField(Category, blank=True, null=True)
 
     class Meta:
         verbose_name_plural = 'Projects'
