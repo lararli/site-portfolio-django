@@ -74,12 +74,16 @@ class Profile(models.Model):
 
     objects = ProfileManager()
 
+    class Meta:
+        verbose_name_plural = 'Profile'
+
 class URLs(models.Model):
     name = models.CharField(max_length=100)
     url = models.URLField()
     image = models.ImageField(upload_to='icons')
 
-    
+    class Meta:
+        verbose_name_plural = 'URLs'
     
     def __str__(self):
         return self.name

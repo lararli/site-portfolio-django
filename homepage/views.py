@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Profile, URLs
 
-def index(request):
+def profile(request):
     # Assuming you have a unique identifier for your profile, such as an ID or a slug
     profile_id = 1  # Replace with the actual ID or slug of your profile
 
