@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "projects",
     "homepage",
-    "contact"
+    "contact",
+    'shared_templates'
 ]
 
 MIDDLEWARE = [

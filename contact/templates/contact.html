@@ -1,13 +1,56 @@
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit</button>
-</form>
+{% comment %} {% block title %}My Form Page{% endblock %} {% endcomment %}
 
-{% if messages %}
-    <ul clas="messages">
-        {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-{% endif %}
+{% block content %}
+    {% include 'header.html' with page="contact" %}
+    <div class="container mt-4">
+        <!-- Your HTML form -->
+        <form id="my-form" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <!-- Bootstrap alert for error messages -->
+        <div id="error-messages" class="alert alert-danger mt-2" role="alert" style="display: none;"></div>
+
+        <!-- Bootstrap alert for success message -->
+        <div id="success-message" class="alert alert-success mt-2" role="alert" style="display: none;"></div>
+    </div>
+
+    <!-- JavaScript to handle form submission -->
+    <script>
+        $(document).ready(function() {
+            $('#my-form').on('submit', function(e) {
+                // Prevent the form from submitting normally
+                e.preventDefault();
+
+                // Submit the form via regular form submission
+                $.ajax({
+                    type: 'POST',
+                    url: $(this).attr('action'),
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        if (response.success) {
+                            // Display success message
+                            $('#success-message').text(response.message).show();
+                            $('#error-messages').hide(); // Hide error messages
+                            $('#my-form')[0].reset(); // Clear the form after successful submission
+                        } else {
+                            // Handle form validation errors
+                            var errorList = '';
+                            for (var field in response.errors) {
+                                errorList += response.errors[field].join(', ') + '<br>';
+                            }
+                            $('#error-messages').html(errorList).show();
+                            $('#success-message').hide(); // Hide success message
+                        }
+                    },
+                    error: function() {
+                        alert('Error occurred while submitting the form.');
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}
+
