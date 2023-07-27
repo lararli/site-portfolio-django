@@ -23,17 +23,3 @@ class ModelTests(TestCase):
     def test_urls_model_str(self):
         url = URLs.objects.create(name='Example', url='http://example.com', image='example.jpg')
         self.assertEqual(str(url), 'Example')
-
-    # def test_profile_view(self):
-    #     response = self.client.get(self.url)
-
-    #     self.assertEqual(response.status_code, 200)  # Assert that the response status code is 200 (OK)
-    #     self.assertTemplateUsed(response, 'homepage.html')  # Assert that the correct template is used
-
-    #     # Retrieve the profile from the database
-    #     profile = get_object_or_404(Profile, id=self.profile.id)
-    #     self.assertEqual(response.context['profile'], profile)  # Assert that the correct profile is passed to the template
-
-    #     # Assert the profile attributes
-    #     self.assertEqual(profile.name, 'John Doe')
-    #     self.assertEqual(profile.bio, 'Test bio')

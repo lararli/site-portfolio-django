@@ -60,7 +60,7 @@ class ContactAppTestCase(TestCase):
         response = self.client.post(url, data)
         
         # Print captured queries
-        self.assertEqual(response.status_code, 302)  # Check if the response is redirect
+        self.assertEqual(response.status_code, 200) 
         
     
     

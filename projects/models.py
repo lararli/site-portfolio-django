@@ -14,10 +14,10 @@ class Category(models.Model):
 class Project(models.Model):
     project_name = models.CharField(max_length=200)
     description = models.CharField(max_length=500)
-    image = models.ImageField(upload_to='images')
+    image = models.ImageField(upload_to='images', blank=True, null=True)
     url = models.URLField(blank=True)
     github_repo = models.URLField(blank=True)
-    date = models.DateField()
+    date = models.DateField(null=True)
     tags = models.ManyToManyField(Category, blank=True, null=True)
 
     class Meta:
